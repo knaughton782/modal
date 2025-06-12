@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>OLC Modal</title>
+    <style>
+        .olc-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            max-width: 600px;
+            width: 90%;
+            padding: 20px;
+            border: 2px solid #0057AD;
+            border-radius: 6px;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .olc-modal:not(.hidden) {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%);
+        }
+
+        .olc-modal-content {
+            position: relative;
+        }
+
+        .close-olc-modal {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0057AD;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            line-height: 1;
+        }
+
+        .close-olc-modal:hover {
+            color: #666;
+            transform: scale(1.2);
+        }
+
+        .open-olc-modal {
+            background: #0057AD;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .open-olc-modal:hover {
+            background: #023D79;
+            color: white;
+        }
+
+        /* background opacity  */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+        }
+
+        .overlay.hidden {
+            display: none;
+        }
+
+        @media (max-width: 400px) {
+            .olc-modal {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modal Start -->
+    <div class="olc-modal-wrapper">
+        <button class="open-olc-modal">Click for Answer</button>
+
+        <div class="olc-modal hidden" role="dialog" aria-modal="true" aria-labelledby="olc-modal-title">
+            <button class="close-olc-modal" aria-label="Close modal">&times;</button>
+            <div class="olc-modal-content">
+                <h2 id="olc-modal-title">Answer Title or Headline</h2>
+                <p>Here's where your custom content goes! Add text, images, videos, whatever you like.</p>
+            </div>
+        </div>
+
+        <div class="overlay hidden"></div>
+    </div>
+<!-- Modal End -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.olc-modal-wrapper').forEach(wrapper => {
+                const olcOpenBtn = wrapper.querySelector('.open-olc-modal');
+                const olcModal = wrapper.querySelector('.olc-modal');
+                const olcCloseBtn = wrapper.querySelector('.close-olc-modal');
+                const overlay = wrapper.querySelector('.overlay');
+
+
+                // user can tab to any of these elements 
+                const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+                const trapFocus = (e) => {
+                    const focusableElements = modal.querySelectorAll(focusableSelectors);
+                    const first = focusableElements[0];
+                    const last = focusableElements[focusableElements.length - 1];
+                    if (e.key === 'Tab') {
+                        if (e.shiftKey && document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        } else if (!e.shiftKey && document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                };
+                // open modal on button click
+                olcOpenBtn.addEventListener('click', () => {
+                    olcModal.classList.remove('hidden');
+                    overlay.classList.remove('hidden');
+                    olcOpenBtn.setAttribute('aria-expanded', 'true');
+                    olcCloseBtn.focus();
+                    olcModal.addEventListener('keydown', trapFocus);
+                    document.body.style.overflow = 'hidden'; // background won't scroll
+                });
+                // close modal on overlay click or close button click
+                const closeModal = () => {
+                    olcModal.classList.add('hidden');
+                    overlay.classList.add('hidden');
+                    olcOpenBtn.setAttribute('aria-expanded', 'false');
+                    olcOpenBtn.focus();
+                    olcModal.removeEventListener('keydown', trapFocus);
+                    document.body.style.overflow = ''; // restore background scroll
+                };
+
+                olcCloseBtn.addEventListener('click', closeModal);
+                overlay.addEventListener('click', closeModal);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !olcModal.classList.contains('hidden')) {
+                        closeModal();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

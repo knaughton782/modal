@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      /* font-weight: 300;  */
+    }
+
+
+    .options {
+      display: flex;
+      /* Align options side by side */
+      flex-direction: column;
+      /* Add space between options */
+      gap: 10px;
+    }
+
+    .center {
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .header {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #023D79;
+      padding: 15px 0 0 0;
+      font-weight: 700;
+    }
+
+    /* Overlay (darker background) */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Semi-transparent black */
+      z-index: 1000;
+      /* Ensure it's on top */
+      display: none;
+      /* Hidden by default */
+    }
+
+    #results {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1001;
+      /* On top of the overlay */
+      display: none;
+      /* Hidden by default */
+      width: 300px;
+      /* Adjust as needed */
+      text-align: center;
+    }
+
+    .button {
+      margin: 10px;
+      padding: 10px;
+      background-color: #0057AD;
+      border: 1px solid #023D79;
+      border-radius: 5px;
+      font-size: 1em;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .closeButton {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 10px;
+      padding: 5px;
+      background-color: #e0e0e0;
+      border: thin solid #c3c3c3;
+      border-radius: 5px;
+      font-size: 1em;
+      color: #023D79;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #023D79;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+        /* Single column for narrow screens */
+      }
+    }
+  </style>
+  <title>Quiz</title>
+</head>
+
+<body>
+  <main>
+
+    <div class="quiz">
+
+      <form name="quizForm" id="quizForm" action="quizResults.html" method="post" class="quiz">
+
+        <!-- ********** question one  *********-->
+        <div class="question">
+          <label for="question1"><strong>Question 1:</strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" name="question1" value="punish" id="punish" />A. Children get into trouble because their parents punish them too much.</label>
+            <label>
+              <input type="radio" name="question1" value="noPunish" id="noPunish" />B. The trouble with most children nowadays is that their parents are too easy with them.
+            </label>
+          </div>
+        </div>
+
+
+        <!-- ********** question two  *********-->
+        <div class="question">
+          <label for="question2"><strong>Question 2:</strong> </label>
+          <div class="options">
+            <label>
+              <input type="radio" name="question2" value="badLuck" id="badLuck" />A. Many of the unhappy things in people's lives are partly due to bad luck.</label>
+            <label>
+              <input type="radio" name="question2" value="notBadLuck" id="notBadLuck" />B. People's misfortunes result from the mistakes they make.
+            </label>
+          </div>
+        </div>
+
+
+        <!-- ********** question three  *********-->
+        <div class="question">
+          <label for="question3"><strong>Question 3: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" name="question3" value="politicsWars" id="politicsWars" />A. One of the major reasons why we have wars is because people don't take enough interest in politics.</label>
+            <label>
+              <input type="radio" name="question3" value="alwaysWars" id="alwaysWars" />B. There will always be wars, no matter how hard people try to prevent them.</label>
+          </div>
+        </div>
+
+
+        <!-- ********** question four  *********-->
+        <div class="question">
+          <label for="question4"><strong>Question 4: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" name="question4" value="deserve" id="deserve" />A. In the long run people get the respect they deserve in this world.</label>
+            <label>
+              <input type="radio" name="question4" value="unrecognizeDeserve" id="unrecognizeDeserve" />B. Unfortunately, an individual's worth often passes unrecognized no matter how hard he tries</label>
+          </div>
+        </div>
+
+
+        <!-- ********** question five  *********-->
+        <div class="question">
+          <label for="question5"><strong>Question 5: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" name="question5" value="fairTeachers" id="fairTeachers" />A. The idea that teachers are unfair to students is nonsense.</label>
+            <label>
+              <input type="radio" name="question5" value="unfairTeachers" id="unfairTeachers" />B. Most students don't realize the extent to which their grades are influenced by accidental happenings.</label>
+          </div>
+        </div>
+
+
+        <!-- ********** question six  *********-->
+        <div class="question">
+          <label for="question6"><strong>Question 6: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" name="question6" value="leader" id="leader" />A. Without the right breaks, one cannot be an effective leader.</label>
+            <label>
+              <input type="radio" name="question6" value="notLeader" id="notLeader" />B. Capable people who fail to become leaders have not taken advantage of their opportunities.</label>
+          </div>
+        </div>
+
+        <!-- ********** question seven  *********-->
+        <div class="question">
+          <label for="question7"><strong>Question 7: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="likePeople" name="question7" value="likePeople" />A. No matter how hard you try some people just don't like you.</label>
+            <label>
+              <input type="radio" id="dontLikePeople" name="question7" value="dontLikePeople" />B. People who can't get others to like them don't understand how to get along with others.</label>
+          </div>
+        </div>
+
+        <!-- ********** question eight  *********-->
+        <div class="question">
+          <label for="question8"><strong>Question 8: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="heredity" name="question8" value="heredity" />A. Heredity plays the major role in determining one's personality.</label>
+            <label>
+              <input type="radio" id="notHeredity" name="question8" value="notHeredity" />B. It is one's experiences in life which determine what they're like.</label>
+          </div>
+        </div>
+
+        <!-- ********** question nine  *********-->
+        <div class="question">
+          <label for="question9"><strong>Question 9: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="fate" name="question9" value="fate" />A. I have often found that what is going to happen will happen.</label>
+
+            <label>
+              <input type="radio" id="noFate" name="question9" value="noFate" />B. Trusting to fate has never turned out as well for me as making a decision to take a definite course of action.</label>
+          </div>
+        </div>
+
+        <!-- ********** question ten  *********-->
+        <div class="question">
+          <label for="question10"><strong>Question 10: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="prepared" name="question10" value="prepared" />A. In the case of the well prepared student there is rarely, if ever, such a thing as an unfair test.</label>
+            <label>
+              <input type="radio" id="notPrepared" name="question10" value="notPrepared" />B. Many times exam questions tend to be so unrelated to course work that studying in really useless.</label>
+          </div>
+        </div>
+
+        <!-- ********** question eleven  *********-->
+        <div class="question">
+          <label for="question11"><strong>Question 11: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="hardWork" name="question11" value="hardWork" />A. Becoming a success is a matter of hard work, luck has little or nothing to do with it.</label>
+            <label>
+              <input type="radio" id="notHardWork" name="question11" value="notHardWork" />B. Getting a good job depends mainly on being in the right place at the right time.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 12  *********-->
+        <div class="question">
+          <label for="question12"><strong>Question 12: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="noPower" name="question12" value="noPower" />A. The average citizen can have an influence in government decisions.</label>
+            <label>
+              <input type="radio" id="power" name="question12" value="power" />B. This world is run by the few people in power, and there is not much the little guy can do about it.</label>
+          </div>
+        </div>
+
+
+        <!-- ********** question 13  *********-->
+        <div class="question">
+          <label for="question13"><strong>Question 13: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="plans" name="question13" value="plans" />A. When I make plans, I am almost certain that I can make them work.</label>
+            <label>
+              <input type="radio" id="planAhead" name="question13" value="planAhead" />B. It is not always wise to plan too far ahead because many things turn out to- be a matter of good or bad fortune anyhow.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 14  *********-->
+        <div class="question">
+          <label for="question14"><strong>Question 14: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="noGood" name="question14" value="noGood" />A. There are certain people who are just no good.</label>
+            <label>
+              <input type="radio" id="good" name="question14" value="good" />B. There is some good in everybody.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 15  *********-->
+        <div class="question">
+          <label for="question15"><strong>Question 15: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="work" name="question15" value="work" />A. In my case getting what I want has little or nothing to do with luck.</label>
+            <label>
+              <input type="radio" id="noWork" name="question15" value="noWork" />B. Many times we might just as well decide what to do by flipping a coin.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 16  *********-->
+        <div class="question">
+          <label for="question16"><strong>Question 16: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="luckyBoss" name="question16" value="luckyBoss" />A. Who gets to be the boss often depends on who was lucky enough to be in the right place first.</label>
+            <label>
+              <input type="radio" id="abilityBoss" name="question16" value="abilityBoss" />B. Getting people to do the right thing depends upon ability. Luck has little or nothing to do with it.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 17  *********-->
+        <div class="question">
+          <label for="question17"><strong>Question 17: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="victims" name="question17" value="victims" />A. As far as world affairs are concerned, most of us are the victims of forces we can neither understand, nor control.</label>
+            <label>
+              <input type="radio" id="notVictims" name="question17" value="notVictims" />B. By taking an active part in political and social affairs the people can control world events.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 18  *********-->
+        <div class="question">
+          <label for="question18"><strong>Question 18: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="accidental" name="question18" value="accidental" />A. Most people don't realize the extent to which their lives are controlled by accidental happenings.</label>
+            <label>
+              <input type="radio" id="notAccidental" name="question18" value="notAccidental" />B. There really is no such thing as "luck."</label>
+          </div>
+        </div>
+
+        <!-- ********** question 19  *********-->
+        <div class="question">
+          <label for="question19"><strong>Question 19: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="admitMistakes" name="question19" value="admitMistakes" />A. One should always be willing to admit mistakes.</label>
+            <label>
+              <input type="radio" id="coverMistakes" name="question19" value="coverMistakes" />B. It is usually best to cover up one's mistakes.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 20  *********-->
+        <div class="question">
+          <label for="question20"><strong>Question 20: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="friends" name="question20" value="friends" />
+              A. It is hard to know whether or not a person really likes you.</label>
+            <label>
+              <input type="radio" id="niceFriends" name="question20" value="niceFriends" />B. How many friends you have depends upon how nice a person you are.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 21  *********-->
+        <div class="question">
+          <label for="question21"><strong>Question 21: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="balanced" name="question21" value="balanced" />
+              A. In the long run the bad things that happen to us are balanced by the good ones.</label>
+            <label>
+              <input type="radio" id="notBalanced" name="question21" value="notBalanced" />B. Most misfortunes are the result of lack of ability, ignorance, laziness, or all three.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 22  *********-->
+        <div class="question">
+          <label for="question22"><strong>Question 22: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="eliminateCorruption" name="question22" value="eliminateCorruption" />
+              A. With enough effort we can wipe out political corruption.</label>
+            <label>
+              <input type="radio" id="cantEliminateCorruption" name="question22" value="cantEliminateCorruption" />B. It is difficult for people to have much control over the things politicians do in office.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 23  *********-->
+        <div class="question">
+          <label for="question23"><strong>Question 23: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="grades" name="question23" value="grades" />
+              A. Sometimes I can't understand how teachers arrive at the grades they give.</label>
+            <label>
+              <input type="radio" id="studyGrades" name="question23" value="studyGrades" />B. There is a direct connection between how hard I study and the grades I get.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 24  *********-->
+        <div class="question">
+          <label for="question24"><strong>Question 24: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="manage" name="question24" value="manage" />
+              A. A good leader expects people to decide for themselves what they should do.</label>
+            <label>
+              <input type="radio" id="microManage" name="question24" value="microManage" />B. A good leader makes it clear to everybody what their jobs are.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 25  *********-->
+        <div class="question">
+          <label for="question25"><strong>Question 25: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="influence" name="question25" value="influence" />
+              A. Many times I feel that I have little influence over the things that happen to me.</label>
+            <label>
+              <input type="radio" id="noInfluence" name="question25" value="noInfluence" />B. It is impossible for me to believe that chance or luck plays an important role in my life.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 26  *********-->
+        <div class="question">
+          <label for="question26"><strong>Question 26: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="friendly" name="question26" value="friendly" />
+              A. People are lonely because they don't try to be friendly.</label>
+            <label>
+              <input type="radio" id="notFriendly" name="question26" value="notFriendly" />B. There's not much use in trying too hard to please people, if they like you, they like you.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 27  *********-->
+        <div class="question">
+          <label for="question27"><strong>Question 27: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="sports" name="question27" value="sports" />
+              A. There is too much emphasis on athletics in high school.</label>
+            <label>
+              <input type="radio" id="characterSports" name="question27" value="characterSports" />B. Team sports are an excellent way to build character.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 28  *********-->
+        <div class="question">
+          <label for="question28"><strong>Question 28: </strong></label>
+          <div class="options">
+            <label>
+
+              <input type="radio" id="myDoing" name="question28" value="myDoing" />
+              A. What happens to me is my own doing.</label>
+            <label>
+              <input type="radio" id="notMyDoing" name="question28" value="notMyDoing" />B. Sometimes I feel that I don't have enough control over the direction my life is taking.</label>
+          </div>
+        </div>
+
+        <!-- ********** question 29  *********-->
+        <div class="question">
+          <label for="question29"><strong>Question 29: </strong></label>
+          <div class="options">
+            <label>
+              <input type="radio" id="politicians" name="question29" value="politicians" />
+              A. Most of the time I can't understand why politicians behave the way they do.</label>
+            <label>
+              <input type="radio" id="notPoliticians" name="question29" value="notPoliticians" />B. In the long run the people are responsible for bad government on a national as well as on a local level.</label>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- ********** submit button  *********-->
+      <div class="center">
+        <button class="button" id="submit" type="button" form="quizForm" onclick="scoreQuiz()">
+          Click for Score
+        </button>
+      </div>
+
+      <!-- ********** results section  *********-->
+      <div class='overlay' id='overlay'>
+        <div id="results" class="modal">
+          <button class="closeButton" id="closeButton" onclick="hideModal()">X</button>
+          <h2>RESULTS: <span class="totals" id="result"></span></h2>
+          <p>A high score = External Locus of Control<br>
+            A low score = Internal Locus of Control</p>
+          <br>
+          <button class="button" class="reload" onclick="redo()">Click here to redo the activity.</button>
+
+        </div>
+      </div>
+  </main>
+
+  <script>
+   var score = 0;
+
+
+    function scoreQuiz() {
+      //question two
+      if (document.getElementById('badLuck').checked) {
+        score = score + 1;
+      } else if (document.getElementById('notBadLuck').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      //question three
+      if (document.getElementById('politicsWars').checked) {
+        score = score;
+      } else if (document.getElementById('alwaysWars').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question four
+      if (document.getElementById('deserve').checked) {
+        score = score;
+      } else if (document.getElementById('unrecognizeDeserve').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question five
+      if (document.getElementById('fairTeachers').checked) {
+        score = score;
+      } else if (document.getElementById('unfairTeachers').checked) {
+        score = score + 1;
+      }
+
+      // question six
+      if (document.getElementById('leader').checked) {
+        score = score + 1;
+      } else if (document.getElementById('notLeader').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question seven
+      if (document.getElementById('likePeople').checked) {
+        score = score + 1;
+      } else if (document.getElementById('dontLikePeople').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question nine
+      if (document.getElementById('fate').checked) {
+        score = score + 1;
+      } else if (document.getElementById('noFate').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question ten
+      if (document.getElementById('prepared').checked) {
+        score = score;
+      } else if (document.getElementById('notPrepared').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question eleven
+      if (document.getElementById('hardWork').checked) {
+        score = score;
+      } else if (document.getElementById('notHardWork').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question twelve
+      if (document.getElementById('noPower').checked) {
+        score = score;
+      } else if (document.getElementById('power').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question thirteen
+      if (document.getElementById('plans').checked) {
+        score = score;
+      } else if (document.getElementById('planAhead').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question fifteen
+      if (document.getElementById('work').checked) {
+        score = score;
+      } else if (document.getElementById('noWork').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question sixteen
+      if (document.getElementById('luckyBoss').checked) {
+        score = score + 1;
+      } else if (document.getElementById('abilityBoss').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question seventeen
+      if (document.getElementById('victims').checked) {
+        score = score + 1;
+      } else if (document.getElementById('notVictims').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question eighteen
+      if (document.getElementById('accidental').checked) {
+        score = score + 1;
+      } else if (document.getElementById('notAccidental').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question twenty
+      if (document.getElementById('friends').checked) {
+        score = score + 1;
+      } else if (document.getElementById('niceFriends').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question twentyone
+      if (document.getElementById('balanced').checked) {
+        score = score + 1;
+      } else if (document.getElementById('notBalanced').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question twentytwo
+      if (document.getElementById('eliminateCorruption').checked) {
+        score = score;
+      } else if (document.getElementById('cantEliminateCorruption').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question twentythree
+      if (document.getElementById('grades').checked) {
+        score = score + 1;
+      } else if (document.getElementById('studyGrades').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question twentyfive
+      if (document.getElementById('influence').checked) {
+        score = score + 1;
+      } else if (document.getElementById('noInfluence').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      // question twentysix
+      if (document.getElementById('friendly').checked) {
+        score = score;
+      } else if (document.getElementById('notFriendly').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question twentyeight
+      if (document.getElementById('myDoing').checked) {
+        score = score;
+      } else if (document.getElementById('notMyDoing').checked) {
+        score = score + 1;
+      }
+      // console.log(`${score}`);
+
+      // question twentynine
+      if (document.getElementById('politicians').checked) {
+        score = score + 1;
+      } else if (document.getElementById('notPoliticians').checked) {
+        score = score;
+      }
+      // console.log(`${score}`);
+
+      displayScore();
+      return score;
+    }
+
+    const closeButton = document.getElementById('closeButton');
+    // Function to hide the modal
+    function hideModal() {
+
+      overlay.style.display = "none";
+      modal.style.display = "none";
+    }
+
+    function redo() {
+      location.reload();
+    }
+
+    function displayScore() {
+      var returnScore = score;
+
+      console.log(returnScore);
+
+      // Get references to the elements
+      const overlay = document.getElementById('overlay');
+      const modal = document.getElementById('results');
+
+
+      overlay.style.display = 'block';
+      modal.style.display = 'block';
+
+      document.getElementById('result').innerHTML = score;
+
+      score = 0;
+    }</script>
+</body>
+
+</html>
