@@ -93,7 +93,7 @@
 <body>
     <!-- Modal Start -->
     <div class="olc-modal-wrapper">
-        <button class="open-olc-modal">Click for Answer</button>
+        <button class="open-olc-modal btn btn-primary" role="button">Click for Answer</button>
 
         <div class="olc-modal hidden" role="dialog" aria-modal="true" aria-labelledby="olc-modal-title">
             <button class="close-olc-modal" aria-label="Close modal">&times;</button>
@@ -105,6 +105,23 @@
 
         <div class="overlay hidden"></div>
     </div>
+
+    <div class="olc-modal-wrapper">
+        <div class="open-olc-modal btn btn-primary" role="button">Click for Answer</div>
+    
+        <div class="olc-modal hidden" role="dialog" aria-modal="true" aria-labelledby="olc-modal-title">
+            <div class="close-olc-modal btn btn-primary" aria-label="Close modal">&times;</div>
+            <div class="olc-modal-content">
+                <h2 id="olc-modal-title">Answer Title or Headline</h2>
+                <p>Here's where your custom content goes! Add text, images, videos, whatever you like.</p>
+            </div>
+        </div>
+    
+        <div class="overlay hidden"></div>
+    </div>
+
+
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. In, expedita consectetur. Reprehenderit delectus vel placeat maxime? Dignissimos non aperiam tempore fugiat exercitationem, sit, ad commodi, assumenda corporis amet aut aliquam?
 <!-- Modal End -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -116,7 +133,7 @@
 
 
                 // user can tab to any of these elements 
-                const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+                const focusableSelectors = 'button, div, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
                 const trapFocus = (e) => {
                     const focusableElements = modal.querySelectorAll(focusableSelectors);
