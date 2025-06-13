@@ -8,6 +8,7 @@
         a.open-olc-modal {
             text-decoration: none;
         }
+
         .olc-modal {
             position: fixed;
             top: 50%;
@@ -56,12 +57,17 @@
         }
 
         .open-olc-modal {
+            display: inline-block;
+            margin: 1em auto;
+            text-align: center;
             background: #0057AD;
             color: white;
+            text-decoration: none;
             border: none;
             border-radius: 4px;
             padding: 10px 20px;
             cursor: pointer;
+            font-size: 1rem;
         }
 
         .open-olc-modal:hover {
@@ -95,7 +101,7 @@
 
 <body>
     <!-- Modal Start -->
-     <!-- use button code  -->
+    <!-- use button code  -->
     <!-- <div class="olc-modal-wrapper">
         <button class="open-olc-modal btn btn-primary" role="button">Click for Answer</button>
 
@@ -112,23 +118,26 @@
 
 
     <!-- if LMS strips button code, use div or a instead  -->
-    <div class="olc-modal-wrapper">
+    <div class="olc-modal-wrapper" style="text-align: center;">
+        <p>Text before button.... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent volutpat urna in felis suscipit, sed euismod justo luctus.</p>
+
         <a href="#" class="open-olc-modal btn btn-primary" role="button">Click for Answer</a>
-    
+
+        <p>Text after button.... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, voluptatem. Temporibus ea placeat beatae repellendus quidem doloremque!</p>
+
         <div class="olc-modal hidden" role="dialog" aria-modal="true" aria-labelledby="olc-modal-title">
             <div class="close-olc-modal btn btn-primary" aria-label="Close modal">&times;</div>
             <div class="olc-modal-content">
                 <h2 id="olc-modal-title">Answer Title or Headline</h2>
-                <p>Here's where your custom content goes! Add text, images, videos, whatever you like.</p>
+                <p>Here's where your custom content goes! Add text, images, videos, whatever you like. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt reiciendis rerum mollitia harum maxime minima dicta dolore, asperiores laborum neque. Corporis inventore ipsam itaque voluptate dolore iste non perspiciatis eveniet.</p>
             </div>
         </div>
-    
+
         <div class="overlay hidden"></div>
     </div>
 
 
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. In, expedita consectetur. Reprehenderit delectus vel placeat maxime? Dignissimos non aperiam tempore fugiat exercitationem, sit, ad commodi, assumenda corporis amet aut aliquam?
-<!-- Modal End -->
+    <!-- Modal End -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.olc-modal-wrapper').forEach(wrapper => {
@@ -137,12 +146,17 @@
                 const olcCloseBtn = wrapper.querySelector('.close-olc-modal');
                 const overlay = wrapper.querySelector('.overlay');
 
+                // Add tabindex="0" dynamically since Canvas strips it from the HTML
+                [olcOpenBtn, olcCloseBtn].forEach(el => {
+                    if (el) el.setAttribute('tabindex', '0');
+                });
+
 
                 // user can tab to any of these elements 
-                const focusableSelectors = 'button, div, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+                const focusableSelectors = 'button, div, a, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
                 const trapFocus = (e) => {
-                    const focusableElements = modal.querySelectorAll(focusableSelectors);
+                    const focusableElements = olcModal.querySelectorAll(focusableSelectors);
                     const first = focusableElements[0];
                     const last = focusableElements[focusableElements.length - 1];
                     if (e.key === 'Tab') {
@@ -155,15 +169,18 @@
                         }
                     }
                 };
-                // open modal on button click
-                olcOpenBtn.addEventListener('click', () => {
+                // open modal on button or touch
+                const openModal = (e) => {
+                    if (e) e.preventDefault();
                     olcModal.classList.remove('hidden');
                     overlay.classList.remove('hidden');
                     olcOpenBtn.setAttribute('aria-expanded', 'true');
                     olcCloseBtn.focus();
                     olcModal.addEventListener('keydown', trapFocus);
                     document.body.style.overflow = 'hidden'; // background won't scroll
-                });
+                };
+                olcOpenBtn.addEventListener('click', openModal);
+                olcOpenBtn.addEventListener('touchstart', openModal, { passive: false });
                 // close modal on overlay click or close button click
                 const closeModal = () => {
                     olcModal.classList.add('hidden');
@@ -175,7 +192,9 @@
                 };
 
                 olcCloseBtn.addEventListener('click', closeModal);
+                olcCloseBtn.addEventListener('touchstart', closeModal, { passive: false });
                 overlay.addEventListener('click', closeModal);
+                overlay.addEventListener('touchstart', closeModal, { passive: false });
 
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && !olcModal.classList.contains('hidden')) {
