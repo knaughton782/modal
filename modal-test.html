@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <title>OLC Modal</title>
     <style>
+        a.open-olc-modal {
+            text-decoration: none;
+        }
         .olc-modal {
             position: fixed;
             top: 50%;
@@ -92,7 +95,8 @@
 
 <body>
     <!-- Modal Start -->
-    <div class="olc-modal-wrapper">
+     <!-- use button code  -->
+    <!-- <div class="olc-modal-wrapper">
         <button class="open-olc-modal btn btn-primary" role="button">Click for Answer</button>
 
         <div class="olc-modal hidden" role="dialog" aria-modal="true" aria-labelledby="olc-modal-title">
@@ -104,10 +108,12 @@
         </div>
 
         <div class="overlay hidden"></div>
-    </div>
+    </div> -->
 
+
+    <!-- if LMS strips button code, use div or a instead  -->
     <div class="olc-modal-wrapper">
-        <div class="open-olc-modal btn btn-primary" role="button">Click for Answer</div>
+        <a href="#" class="open-olc-modal btn btn-primary" role="button">Click for Answer</a>
     
         <div class="olc-modal hidden" role="dialog" aria-modal="true" aria-labelledby="olc-modal-title">
             <div class="close-olc-modal btn btn-primary" aria-label="Close modal">&times;</div>
